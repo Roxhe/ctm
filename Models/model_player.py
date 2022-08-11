@@ -9,6 +9,7 @@ class Player:
         self.gender = gender
         self.global_rank = global_rank
         self.score = 0.0
+        self.id = 0
 
     def __str__(self):
         player_presentation = f'Prénom : {self.first_name}, Nom : {self.last_name}, ' \
@@ -35,4 +36,5 @@ class Player:
                         birthdate=birthdate,
                         gender=gender,
                         global_rank=global_rank)
-        
+
+

@@ -1,4 +1,3 @@
-
 class Match:
     """Initialisation d'un Match"""
     def __init__(self, pair):
@@ -12,7 +11,6 @@ class Match:
         list_pair = []
         for i in self.pair.keys():
             list_pair.append(i)
-        print(list_pair)
         result_inp = int(input(f"Veuillez rentrer le nom du vainqueur entre {list_pair[0]} "
                            f"et {list_pair[1]}\n"
                              f"En cas d'égalité rentrez 0\n"))
@@ -27,10 +25,3 @@ class Match:
 
         print(self.pair)
         return self.pair
-
-
-
-######### Test Zone ##########
-
-match1 = Match({1: 0, 5: 0})
-match1.result()
