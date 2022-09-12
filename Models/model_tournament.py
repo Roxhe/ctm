@@ -3,7 +3,7 @@ from model_round import Round
 
 class Tournament:
     """Initialisation d'un Tournoi"""
-    def __init__(self, name, place, date,  players = [], nb_of_rounds=4):
+    def __init__(self, name, place, date,  players=[], nb_of_rounds=4):
         self.name = name
         self.place = place
         self.date = date
@@ -21,10 +21,10 @@ class Tournament:
     def sort_player(self):
 
         for player in self.players:
-            self.dict_fsort[player.last_name] = player.global_rank
+            self.dict_fsort[player] = player.global_rank
 
         self.dict_fsort = dict(sorted(self.dict_fsort.items(), key=lambda x: x[1], reverse=True))
-        print(self.dict_fsort)
+        self.players = list(self.dict_fsort)
 
         for player in self.players:
             player.id = self.players.index(player) + 1
@@ -35,25 +35,39 @@ class Tournament:
         return self.players_fmatch
 
     def reminds_id(self):
+        for player in self.players:
+            print(f"{player.last_name} {player.first_name} porte le numéro {player.id}.")
 
-        for rid in self.rem_id:
-            print(rid)
 
     def exec_round(self):
+
         print("Début Tour 1")
         round_m = Round(self.players_fmatch)
         round_m.create_pair_round1()
         round_m.run_match()
         print("Fin Tour 1")
+        o = input("Pour un rappel des numéros de joueur tapé : y\n"
+                  "si non, appuyer sur Entrée\n")
+        if o == 'y':
+            print(self.reminds_id())
+
         for i in range(self.nb_of_rounds - 1):
             print(f"Debut Tour {i+2}")
             round_m.create_pair_otherr()
             round_m.run_match()
             print(f"Fin Tour {i + 2}")
+            o = input("Pour un rappel des numéros de joueur tapé : y\n"
+                      "Pour continuer, appuyer sur Entrée\n")
+            if o == 'y':
+                print(self.reminds_id())
 
         for k, l in zip(round_m.score_dict.keys(), round_m.score_dict.values()):
             a = (k, l)
             self.final_result.append(a)
 
         for n, m in zip(list(range(1, 8+1)), self.final_result):
-            print(f"{n}.ID et score: {m}")
+            for player in self.players:
+                if m[0] == player.id:
+                    p = f"{player.last_name} {player.first_name}"
+            print(f"{n}. Nom : {p}\n ID : {m[0]}\n Score: {m[1]}")
+
