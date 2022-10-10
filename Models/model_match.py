@@ -12,8 +12,8 @@ class Match:
         for i in self.pair.keys():
             list_pair.append(i)
         result_inp = int(input(f"Veuillez rentrer le nom du vainqueur entre {list_pair[0]} "
-                           f"et {list_pair[1]}\n"
-                             f"En cas d'égalité rentrez 0\n"))
+                            f"et {list_pair[1]}\n"
+                            f"En cas d'égalité rentrez 0\n"))
 
         if result_inp == 0:
             self.pair[list_pair[0]] += 0.5

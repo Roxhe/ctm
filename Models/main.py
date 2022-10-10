@@ -12,7 +12,13 @@ player7 = Player("Grand", "Guy", "07/07/1997", "n", 7)
 player8 = Player("Henri", "Hugo", "08/08/1998", "n", 56)
 players = [player1, player8, player7, player6, player5, player4, player3, player2]
 
+
+
 tournament_test = Tournament("Test", "AlphaCity", "XX/XX/XXXX", players)
 tournament_test.sort_player()
+
 print("\n")
 tournament_test.exec_round()
+
+
+

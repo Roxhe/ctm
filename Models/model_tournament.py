@@ -1,5 +1,6 @@
-from model_player import Player
-from model_round import Round
+from Models.model_round import Round
+from Models.model_rapport import Rapport
+
 
 class Tournament:
     """Initialisation d'un Tournoi"""
@@ -71,3 +72,5 @@ class Tournament:
                     p = f"{player.last_name} {player.first_name}"
             print(f"{n}. Nom : {p}\n ID : {m[0]}\n Score: {m[1]}")
 
+
+    def selec_player(self):

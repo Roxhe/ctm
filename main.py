@@ -1,39 +1,20 @@
-class Player:
-    """Initialisation des joueurs"""
-    def __init__(self, last_name, first_name, birthdate, gender, global_rank=0):
-        self.last_name = last_name
-        self.first_name = first_name
-        self.birthdate = birthdate
-        self.gender = gender
-        self.global_rank = global_rank
-        self.score = 0.0
-        self.id = 0
+from Models.model_player import Player
 
-    def __str__(self):
-        player_presentation = f'Nom : {self.last_name}/ Prénom : {self.first_name}/ Rang : {self.global_rank}'
-        return player_presentation
+player1 = Player("André", "Albert", "01/01/1991", "n", 10)
+player2 = Player("Breau", "Brigitte", "02/02/1992", "n", 12)
+player3 = Player("Charles", "Charlie", "03/03/1993", "n", 3)
+player4 = Player("Drap", "Dorian", "04/04/1994", "n", 40)
+player5 = Player("Emph", "Ethan", "05/05/1995", "n", 5)
+player6 = Player("Friand", "Felix", "06/06/1996", "n", 36)
+player7 = Player("Grand", "Guy", "07/07/1997", "n", 7)
+player8 = Player("Henri", "Hugo", "08/08/1998", "n", 56)
+players = [player1, player8, player7, player6, player5, player4, player3, player2]
 
 
-players = []
+last_name_inp = input("Nom de famille")
 
-while True:
+research = filter(lambda p: p.last_name == last_name_inp, players)
+joueur_selec = list(research)
 
-    ln = input("Entrez le nom du joueur :\n")
-    fn = input("Entrez le prénom du joueur :\n")
-    bd = input("Entrez la date de naissance du joueur (DD/MM/AAAA) :\n")
-    gd = input("Entrez le genre du joueur :\n")
-    gr = int(input("Entrez le classement global du joueur :\n"))
-
-    player = Player(ln, fn, bd, gd, gr)
-    players.append(player)
-    print(f"Le joueur suivant a été ajouté :"
-          f"{player.__str__()}\n")
-
-    end_or_not = input("Souhaitez vous recréer un joueur ? yes : y / no : n\n")
-    if end_or_not == 'y':
-        continue
-    elif end_or_not == 'n':
-        break
-
-for player in players:
+for player in joueur_selec:
     print(player.__str__())

@@ -12,8 +12,7 @@ class Player:
         self.id = 0
 
     def __str__(self):
-        player_presentation = f'Prénom : {self.first_name}, Nom : {self.last_name}, ' \
-                              f'Rang : {self.global_rank}, Score : {self.score}'
+        player_presentation = f'Nom : {self.last_name}, Prénom : {self.first_name}, Rang : {self.global_rank}'
         return player_presentation
 
     def serialize(self, player):
@@ -24,6 +23,7 @@ class Player:
             "gender": player.gender,
             "global_rank": player.global_rank
         }
+        return serialized_player
 
     def deserialize(self, serialized_player):
         last_name = serialized_player['last_name']
@@ -36,5 +36,5 @@ class Player:
                         birthdate=birthdate,
                         gender=gender,
                         global_rank=global_rank)
-
+        return player
 
