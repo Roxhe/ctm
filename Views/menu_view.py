@@ -64,43 +64,17 @@ class Menu:
 
     def nav_menu(self):
         self.choice = int(input())
-        if self.choice == 1:
-            self.sub_tournament()
-        elif self.choice == 3:
-            exit()
-        elif self.choice == 2:
-            self.sub_player()
-        elif self.choice == 0:
-            self.choice = int(input("Veuillez rentrez soir, 1, soit 2, soit 3. \n"))
+        if self.choice == 0:
+            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
 
     def nav_tournament(self):
+
         self.choice = int(input())
-        if self.choice == 1:
-            self.display_tournament.prompt_tournament()
-            self.display_tournament.tournament_in_play()
-            self.sub_tournament()
-        elif self.choice == 3:
-            self.display_menu()
-        elif self.choice == 2:
-            self.display_tournament.return_all_tournament()
-            self.sub_tournament()
-        elif self.choice == 0:
-            self.choice = int(input("Veuillez rentrez soir, 1, soit 2, soit 3. \n"))
+        if self.choice == 0:
+            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
 
     def nav_player(self):
 
         self.choice = int(input())
-        if self.choice == 1:
-            self.display_player.prompt_players()
-            self.sub_player()
-        elif self.choice == 3:
-            self.display_menu()
-        elif self.choice == 2:
-            self.display_player.return_all_players()
-            self.sub_player()
-        elif self.choice == 0:
-            self.choice = int(input("Veuillez rentrez soir, 1, soit 2, soit 3. \n"))
-
-
-menu_t = Menu()
-menu_t.display_menu()
+        if self.choice == 0:
+            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))

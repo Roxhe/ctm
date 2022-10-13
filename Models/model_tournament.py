@@ -1,5 +1,5 @@
 from Models.model_round import Round
-from Models.model_rapport import Rapport
+
 
 
 class Tournament:
@@ -73,4 +73,3 @@ class Tournament:
             print(f"{n}. Nom : {p}\n ID : {m[0]}\n Score: {m[1]}")
 
 
-    def selec_player(self):
