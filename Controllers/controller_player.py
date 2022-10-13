@@ -1,18 +1,24 @@
 from Views.menu_view import Menu
 from Views.players_view import DisplayPlayer
+from Models.model_player import Player
+
 
 class Player():
 
+    def __init__(self):
+        self.model_player = Player()
+        self.view_player = DisplayPlayer()
+        self.menu = Menu()
+
+
     def nav_submenu_player(self):
-        menu = Menu()
-        display_player = DisplayPlayer()
+        while True:
+            choice = self.menu.display_menu()
+            if choice == 1:
+                self.menu.sub_tournament()
+            elif choice == 2:
+                self.menu.sub_player()
+            elif choice == 3:
+                exit()
 
-        if menu.choice == 1:
-           display_player.prompt_players()
-           menu.sub_player()
-        elif menu.choice == 2:
-           display_player.return_all_players()
-           menu.sub_player()
-
-        elif menu.choice == 3:
-            menu.sub_player()
+Player().nav_submenu_player()
