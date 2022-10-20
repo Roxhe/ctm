@@ -29,7 +29,12 @@ class Menu:
 
         main_menu0 = Markdown(main_menu)
         console.print(main_menu0)
-        self.nav_menu()
+
+        self.choice = int(input())
+        if self.choice == 0:
+            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
+
+        return self.choice
 
     def sub_tournament(self):
         main_sub_tournament = """
@@ -44,7 +49,11 @@ class Menu:
         main_sub_tournament0 = Markdown(main_sub_tournament)
         console.print(main_sub_tournament0)
 
-        self.nav_tournament()
+        self.choice = int(input())
+        if self.choice == 0:
+            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
+
+        return self.choice
 
     def sub_player(self):
         main_sub_player = """
@@ -60,21 +69,10 @@ class Menu:
 
         main_sub_player0 = Markdown(main_sub_player)
         console.print(main_sub_player0)
-        self.nav_player()
-
-    def nav_menu(self):
         self.choice = int(input())
         if self.choice == 0:
             self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
 
-    def nav_tournament(self):
+        return self.choice
 
-        self.choice = int(input())
-        if self.choice == 0:
-            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
 
-    def nav_player(self):
-
-        self.choice = int(input())
-        if self.choice == 0:
-            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
