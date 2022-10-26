@@ -11,6 +11,7 @@ class MenuController:
 
 
     def nav_menu_cont(self):
+        # match case
         while True:
             choice = self.menu.display_menu()
             print(choice)
