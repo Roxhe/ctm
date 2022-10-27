@@ -1,9 +1,6 @@
 from rich.console import Console
 from rich.markdown import Markdown
 
-from Views.players_view import DisplayPlayer
-from Views.tournaments_view import DisplayTournament
-
 
 console = Console()
 
@@ -12,8 +9,7 @@ class Menu:
 
     def __init__(self):
         self.choice = 0
-        self.display_player = DisplayPlayer()
-        self.display_tournament = DisplayTournament()
+
 
     def display_menu(self):
 
@@ -31,9 +27,6 @@ class Menu:
         console.print(main_menu0)
 
         self.choice = int(input())
-        if self.choice == 0:
-            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
-
         return self.choice
 
     def sub_tournament(self):
@@ -50,9 +43,6 @@ class Menu:
         console.print(main_sub_tournament0)
 
         self.choice = int(input())
-        if self.choice == 0:
-            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
-
         return self.choice
 
     def sub_player(self):
@@ -69,10 +59,8 @@ class Menu:
 
         main_sub_player0 = Markdown(main_sub_player)
         console.print(main_sub_player0)
-        self.choice = int(input())
-        if self.choice == 0:
-            self.choice = int(input("Veuillez rentrer soit 1, soit 2, soit 3. \n"))
 
+        self.choice = int(input())
         return self.choice
 
 

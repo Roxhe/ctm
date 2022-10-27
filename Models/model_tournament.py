@@ -19,26 +19,11 @@ class Tournament:
         tournament_presentation = f'Ce tournoi "{self.name}", se déroule à "{self.place}", le "{self.date}".'
         return tournament_presentation
 
-    def sort_player(self):
 
-        for player in self.players:
-            self.dict_fsort[player] = player.global_rank
-
-        self.dict_fsort = dict(sorted(self.dict_fsort.items(), key=lambda x: x[1], reverse=True))
-        self.players = list(self.dict_fsort)
-
-        for player in self.players:
-            player.id = self.players.index(player) + 1
-            self.rem_id.append(f"{player.last_name} {player.first_name} portera le numéro {player.id}.")
-            print(f"{player.last_name} {player.first_name} portera le numéro {player.id}.")
-            self.players_fmatch.append(player.id)
-
-        return self.players_fmatch
 
     def reminds_id(self):
         for player in self.players:
             print(f"{player.last_name} {player.first_name} porte le numéro {player.id}.")
-
 
     def exec_round(self):
 

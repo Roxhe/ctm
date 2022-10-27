@@ -30,9 +30,9 @@ class Rapport:
         players = [player1, player8, player7, player6, player5, player4, player3, player2]
 
         self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], players)
-        test_tournament = self.tournament
+
         self.list_stock_tournament.append(self.tournament)
-        return test_tournament
+        return self.tournament
 
     def return_tournament_list(self):
         for self.tournament in self.list_stock_tournament:

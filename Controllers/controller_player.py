@@ -10,12 +10,14 @@ class PlayerController:
         self.menu = Menu()
 
     def nav_submenu_player(self):
-        # match case
-        while True:
-            choice = self.menu.display_menu()
-            if choice == 1:
+        choice = self.menu.sub_player()
+        match choice:
+            case 1:
                 self.view_player.prompt_players()
-            elif choice == 2:
+            case 2:
                 self.view_player.return_all_players()
-            elif choice == 3:
-                exit()
+            case 3:
+                self.menu.display_menu()
+            case _:
+                #print("Veuillez rentrer soit 1, soit 2, soit 3. \n")
+                self.nav_submenu_player()

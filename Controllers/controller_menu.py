@@ -9,15 +9,15 @@ class MenuController:
         self.tournament_cont = TournamentController()
         self.player_cont = PlayerController()
 
-
     def nav_menu_cont(self):
-        # match case
-        while True:
-            choice = self.menu.display_menu()
-            print(choice)
-            if choice == 1:
+        choice = self.menu.display_menu()
+        match choice:
+            case 1:
                 self.tournament_cont.nav_submenu_tournament()
-            elif choice == 2:
+            case 2:
                 self.player_cont.nav_submenu_player()
-            elif choice == 3:
+            case 3:
                 exit()
+            case _:
+                #print("Veuillez rentrer soit 1, soit 2, soit 3. \n")
+                self.nav_menu_cont()
