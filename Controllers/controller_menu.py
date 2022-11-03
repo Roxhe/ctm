@@ -2,6 +2,7 @@ from Views.menu_view import Menu
 from Controllers.controller_tournament import TournamentController
 from Controllers.controller_player import PlayerController
 
+
 class MenuController:
 
     def __init__(self):
@@ -19,5 +20,5 @@ class MenuController:
             case 3:
                 exit()
             case _:
-                #print("Veuillez rentrer soit 1, soit 2, soit 3. \n")
+                self.menu.menu_error()
                 self.nav_menu_cont()

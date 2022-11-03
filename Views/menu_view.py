@@ -63,4 +63,5 @@ class Menu:
         self.choice = int(input())
         return self.choice
 
-
+    def menu_error(self):
+        print("Veuillez rentrer soit 1, soit 2, soit 3. \n")

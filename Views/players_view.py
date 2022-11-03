@@ -30,5 +30,3 @@ class DisplayPlayer:
 
     def return_all_players(self):
         self.players_rapport.return_player_list()
-
-
