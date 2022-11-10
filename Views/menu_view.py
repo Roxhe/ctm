@@ -35,9 +35,10 @@ class Menu:
     
     Veuillez sélectionner le menu désiré.
     
-    1. Créer un Tournoi
-    2. Liste des anciens Tournois   
-    3. Retour au menu principal
+    1. Créer un Tournoi à partir de joueurs existants
+    2. Créer un Tournoi à partir de nouveaux joueurs
+    3. Liste des anciens Tournois   
+    4. Retour au menu principal
     """
         main_sub_tournament0 = Markdown(main_sub_tournament)
         console.print(main_sub_tournament0)

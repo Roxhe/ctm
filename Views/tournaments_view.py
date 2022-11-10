@@ -1,11 +1,9 @@
 from Models.model_rapport import Rapport
-from Controllers.controller_rapport import RapportController
 
 class DisplayTournament:
 
     def __init__(self):
         self.tournament_rapport = Rapport()
-        self.rapport_controller = RapportController()
         self.lst_input_tournament = []
 
     def prompt_tournament(self):
@@ -18,7 +16,7 @@ class DisplayTournament:
         return self.lst_input_tournament, self.tournament_rapport
 
     def return_all_tournament(self):
-        self.rapport_controller.return_tournament_list()
+        self.tournament_rapport.return_tournament_list()
 
     def reminds_id(self, tournament):
         o = input("Pour un rappel des numéros de joueur tapé : y\n"
@@ -39,3 +37,7 @@ class DisplayTournament:
 
     def display_round1_bounds(self):
         print("\nDebut Tour 1")
+
+    def selec_player(self):
+        selec_player = int(input("Rentrez le numéro associé au joueur pour le sélectionner : "))
+        return selec_player

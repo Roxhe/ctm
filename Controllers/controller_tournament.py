@@ -1,48 +1,37 @@
-from Views.menu_view import Menu
+from Controllers.controller_round import Round
 from Views.tournaments_view import DisplayTournament
+from Views.players_view import DisplayPlayer
 from Models.model_tournament import Tournament
 from Models.model_rapport import Rapport
-from Controllers.controller_round import Round
-
 
 class TournamentController:
 
     def __init__(self):
+        self.view_player = DisplayPlayer()
         self.view_tournament = DisplayTournament()
-        self.menu = Menu()
         self.tournament = 0
         self.tournament_rapport = Rapport()
         self.players = []
 
-    def nav_submenu_tournament(self):
-
-        choice = self.menu.sub_tournament()
-        match choice:
-            case 1:
-                self.create_tournament()
-                self.tournament_in_play()
-                self.nav_submenu_tournament()
-            case 2:
-                self.view_tournament.return_all_tournament()
-                self.menu.sub_tournament()
-            case 3:
-                self.menu.display_menu()
-            case _:
-                self.menu.menu_error()
-                self.nav_submenu_tournament()
-
-        return self.tournament
-
     def create_tournament(self):
         self.view_tournament.prompt_tournament()
-
         lst_t = self.view_tournament.lst_input_tournament
+        self.tournament_rapport.return_player_list()
+        for i in range(8):
+            ind_player = self.view_tournament.selec_player()
+            self.players.append(self.tournament_rapport.list_stock_players[ind_player - 1])
         self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], self.players)
-        return self.tournament
+        return self.tournament, self.players
+
+    def create_tournament_new_players(self):
+        self.view_tournament.prompt_tournament()
+        lst_t = self.view_tournament.lst_input_tournament
+        self.players = self.view_player.prompt_players_new_tournament()
+        self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], self.players)
+        return self.tournament, self.players
 
     def sort_player(self):
-        self.tournament.players = self.tournament_rapport.list_stock_players
-
+        self.tournament.players = self.players
         for player in self.tournament.players:
             self.tournament.dict_fsort[player] = player.global_rank
 

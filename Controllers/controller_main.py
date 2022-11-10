@@ -1,7 +1,8 @@
-from Controllers.controller_menu import MenuController
+from Controllers.controller_nav import NavController
 
 
 def program_exec():
-    MenuController().nav_menu_cont()
+    NavController().nav_main()
+
 
 program_exec()
