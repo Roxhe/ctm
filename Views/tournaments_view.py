@@ -1,10 +1,11 @@
 from Models.model_rapport import Rapport
-
+from Controllers.controller_rapport import RapportController
 
 class DisplayTournament:
 
     def __init__(self):
         self.tournament_rapport = Rapport()
+        self.rapport_controller = RapportController()
         self.lst_input_tournament = []
 
     def prompt_tournament(self):
@@ -17,7 +18,7 @@ class DisplayTournament:
         return self.lst_input_tournament, self.tournament_rapport
 
     def return_all_tournament(self):
-        self.tournament_rapport.return_tournament_list()
+        self.rapport_controller.return_tournament_list()
 
     def reminds_id(self, tournament):
         o = input("Pour un rappel des numéros de joueur tapé : y\n"

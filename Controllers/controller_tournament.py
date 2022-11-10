@@ -2,8 +2,7 @@ from Views.menu_view import Menu
 from Views.tournaments_view import DisplayTournament
 from Models.model_tournament import Tournament
 from Models.model_rapport import Rapport
-from Models.model_player import Player
-from Models.model_round import Round
+from Controllers.controller_round import Round
 
 
 class TournamentController:
@@ -59,7 +58,7 @@ class TournamentController:
 
     def tournament_in_play(self):
         self.sort_player()
-        self.exec_round()
+        self.exec_rounds()
 
     def exec_rounds(self):
 

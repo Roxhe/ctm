@@ -1,4 +1,4 @@
-from Models.model_match import Match
+from Controllers.controller_match import Match
 
 
 class Round():
@@ -76,27 +76,3 @@ class Round():
 
         self.pair_fmatch.clear()
         return self.score_dict
-
-
-
-
-
-######### Test Zone ##########
-
-
-list_joueur_test = [1, 2, 3, 4, 5, 6, 7, 8]
-
-"""round1 = Round(list_joueur_test)
-round1.create_pair_round1()
-round1.run_match()
-print("Fin Tour 1", round1.played_match, '\n', round1.score_dict)
-round1.create_pair_otherr()
-round1.run_match()
-round1.create_pair_otherr()
-round1.run_match()
-round1.create_pair_otherr()
-round1.run_match()
-
-print(round1.score_dict)
-print(round1.played_match)
-"""
