@@ -1,13 +1,12 @@
 from Models.model_player import Player
-from Models.model_rapport import Rapport
+
 
 class DisplayPlayer:
 
     def __init__(self):
-        self.players_rapport = Rapport()
         self.lst_player_new_tournament = []
 
-    def prompt_player(self):
+    def prompt_player(self, players_rapport):
         last_name = input("Entrez le nom du joueur :\n")
         first_name = input("Entrez le prénom du joueur :\n")
         birthdate = input("Entrez la date de naissance du joueur (DD/MM/AAAA) :\n")
@@ -15,7 +14,7 @@ class DisplayPlayer:
         globalrank = int(input("Entrez le classement global du joueur :\n"))
 
         lst_input_player = [last_name, first_name, birthdate, gender, globalrank]
-        stocked_player = self.players_rapport.stock_player(lst_input_player)
+        stocked_player = players_rapport.stock_player(lst_input_player)
         print(f"Le joueur suivant a été ajouté :"
               f"{stocked_player.__str__()}\n")
         player = Player(lst_input_player[0], lst_input_player[1],
@@ -23,20 +22,32 @@ class DisplayPlayer:
                         lst_input_player[4])
         return player
 
-    def prompt_players(self):
+    def prompt_suppr_player(self, players_rapport):
+        players_rapport.return_player_list()
+        players_to_suppr = int(input("Entrez le numéro du joueur à supprimer :  "))
+        players_rapport.suppr_player(players_to_suppr)
+
+    def prompt_suppr_players(self, players_rapport):
         while True:
-            self.prompt_player()
+            self.prompt_suppr_player(players_rapport)
+            end_or_not = input("Souhaitez vous supprimer un autre joueur ? yes : y / no : n\n")
+            if end_or_not == 'y':
+                continue
+            elif end_or_not == 'n':
+                players_rapport.return_player_list()
+                break
+
+    def prompt_players(self, players_rapport):
+        while True:
+            self.prompt_player(players_rapport)
             end_or_not = input("Souhaitez vous recréer un joueur ? yes : y / no : n\n")
             if end_or_not == 'y':
                 continue
             elif end_or_not == 'n':
-                self.players_rapport.return_player_list()
+                players_rapport.return_player_list()
                 break
 
-    def prompt_players_new_tournament(self):
+    def prompt_players_new_tournament(self, players_rapport):
         for i in range(8):
-            self.lst_player_new_tournament.append(self.prompt_player())
+            self.lst_player_new_tournament.append(self.prompt_player(players_rapport))
         return self.lst_player_new_tournament
-
-    def return_all_players(self):
-        self.players_rapport.return_player_list()

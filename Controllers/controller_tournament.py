@@ -1,8 +1,7 @@
-from Controllers.controller_round import Round
+from Controllers.controller_round import RoundController
 from Views.tournaments_view import DisplayTournament
 from Views.players_view import DisplayPlayer
 from Models.model_tournament import Tournament
-from Models.model_rapport import Rapport
 
 class TournamentController:
 
@@ -10,24 +9,27 @@ class TournamentController:
         self.view_player = DisplayPlayer()
         self.view_tournament = DisplayTournament()
         self.tournament = 0
-        self.tournament_rapport = Rapport()
         self.players = []
 
-    def create_tournament(self):
+    def create_tournament(self, tournament_rapport):
+        self.players.clear()
         self.view_tournament.prompt_tournament()
         lst_t = self.view_tournament.lst_input_tournament
-        self.tournament_rapport.return_player_list()
+        tournament_rapport.return_player_list()
         for i in range(8):
             ind_player = self.view_tournament.selec_player()
-            self.players.append(self.tournament_rapport.list_stock_players[ind_player - 1])
+            self.players.append(tournament_rapport.list_stock_players[ind_player - 1])
         self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], self.players)
+        tournament_rapport.list_stock_tournament.append(self.tournament)
         return self.tournament, self.players
 
-    def create_tournament_new_players(self):
+    def create_tournament_new_players(self, tournament_rapport):
+        self.players.clear()
         self.view_tournament.prompt_tournament()
         lst_t = self.view_tournament.lst_input_tournament
-        self.players = self.view_player.prompt_players_new_tournament()
+        self.players = self.view_player.prompt_players_new_tournament(tournament_rapport)
         self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], self.players)
+        tournament_rapport.list_stock_tournament.append(self.tournament)
         return self.tournament, self.players
 
     def sort_player(self):
@@ -40,19 +42,16 @@ class TournamentController:
 
         for player in self.tournament.players:
             player.id = self.tournament.players.index(player) + 1
-            self.tournament.rem_id.append(f"{player.last_name} {player.first_name} portera le numéro {player.id}.")
+            self.tournament.rem_id.append(f"{player.last_name} {player.first_name} porte le numéro {player.id}.")
             self.tournament.players_fmatch.append(player.id)
 
         return self.tournament
 
-    def tournament_in_play(self):
-        self.sort_player()
-        self.exec_rounds()
-
     def exec_rounds(self):
 
+        self.view_tournament.rem_id(self.tournament)
         self.view_tournament.display_round1_bounds()
-        round_m = Round(self.tournament.players_fmatch)
+        round_m = RoundController(self.tournament.players_fmatch)
         round_m.create_pair_round1()
         round_m.run_match()
         self.view_tournament.reminds_id(self.tournament)
@@ -68,3 +67,10 @@ class TournamentController:
             self.tournament.final_result.append(a)
 
         self.view_tournament.display_final_result(self.tournament)
+        for played_match_result in round_m.match_and_result:
+            self.tournament.played_match_result.append(played_match_result)
+
+
+    def tournament_in_play(self):
+        self.sort_player()
+        self.exec_rounds()

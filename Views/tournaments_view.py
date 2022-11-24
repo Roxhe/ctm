@@ -18,6 +18,10 @@ class DisplayTournament:
     def return_all_tournament(self):
         self.tournament_rapport.return_tournament_list()
 
+    def rem_id(self, tournament):
+        for player in tournament.players:
+            print(f"{player.last_name} {player.first_name} porte le numéro {player.id}.")
+
     def reminds_id(self, tournament):
         o = input("Pour un rappel des numéros de joueur tapé : y\n"
                       "Pour continuer, appuyer sur Entrée\n")

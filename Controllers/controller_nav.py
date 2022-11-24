@@ -2,6 +2,7 @@ from Controllers.controller_tournament import TournamentController
 from Views.menu_view import Menu
 from Views.tournaments_view import DisplayTournament
 from Views.players_view import DisplayPlayer
+from Models.model_rapport import Rapport
 
 
 class NavController:
@@ -11,8 +12,12 @@ class NavController:
         self.menu = Menu()
         self.view_tournament = DisplayTournament()
         self.view_player = DisplayPlayer()
+        self.rapport = Rapport()
+        self.rapport.deserialize_player()
+        self.rapport.deserialize_tournament()
 
     def nav_main(self):
+
         choice = self.menu.display_menu()
         match choice:
             case 1:
@@ -20,6 +25,8 @@ class NavController:
             case 2:
                 self.nav_submenu_player()
             case 3:
+                self.rapport.serialize_tournament()
+                self.rapport.serialize_player()
                 exit()
             case _:
                 self.menu.menu_error()
@@ -30,15 +37,16 @@ class NavController:
         choice = self.menu.sub_tournament()
         match choice:
             case 1:
-                self.tournament_controller.create_tournament()
+                self.tournament_controller.create_tournament(self.rapport)
                 self.tournament_controller.tournament_in_play()
                 self.nav_submenu_tournament()
             case 2:
-                self.tournament_controller.create_tournament_new_players()
+                self.tournament_controller.create_tournament_new_players(self.rapport)
                 self.tournament_controller.tournament_in_play()
                 self.nav_submenu_tournament()
             case 3:
-                self.view_tournament.return_all_tournament()
+                self.rapport.return_tournament_list()
+                self.rapport.return_tournament_played_match()
                 self.nav_submenu_tournament()
             case 4:
                 self.nav_main()
@@ -50,12 +58,15 @@ class NavController:
         choice = self.menu.sub_player()
         match choice:
             case 1:
-                self.view_player.prompt_players()
+                self.view_player.prompt_players(self.rapport)
                 self.nav_submenu_player()
             case 2:
-                self.view_player.return_all_players()
+                self.rapport.return_player_list()
                 self.nav_submenu_player()
             case 3:
+                self.view_player.prompt_suppr_players(self.rapport)
+                self.nav_submenu_player()
+            case 4:
                 self.nav_main()
             case _:
                 self.menu.menu_error()

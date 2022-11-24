@@ -1,21 +1,17 @@
 from Models.model_player import Player
 from Models.model_tournament import Tournament
-
+from tinydb import TinyDB, Query
 
 class Rapport:
 
     def __init__(self):
-        self.list_stock_players = [Player("André", "Albert", "01/01/1991", "n", 10),
-                                   Player("Breau", "Brigitte", "02/02/1992", "n", 12),
-                                   Player("Charles", "Charlie", "03/03/1993", "n", 3),
-                                   Player("Drap", "Dorian", "04/04/1994", "n", 40),
-                                   Player("Emph", "Ethan", "05/05/1995", "n", 5),
-                                   Player("Friand", "Felix", "06/06/1996", "n", 36),
-                                   Player("Grand", "Guy", "07/07/1997", "n", 7),
-                                   Player("Henri", "Hugo", "08/08/1998", "n", 56)]
+        self.list_stock_players = []
         self.list_stock_tournament = []
         self.player = 0
         self.tournament = 0
+        self.db = TinyDB('db.json')
+        self.players_table = self.db.table("players")
+        self.tournaments_table = self.db.table("tournaments")
 
     def stock_player(self, lst):
         self.player = Player(lst[0], lst[1], lst[2], lst[3], lst[4])
@@ -28,12 +24,97 @@ class Rapport:
             i += 1
             print(f"{i}. ", self.player.__str__())
 
-    def stock_tournament(self, lst_t, players):
-        self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], players)
-        self.list_stock_tournament.append(self.tournament)
-        return self.tournament
-
     def return_tournament_list(self):
+        i = 0
         for self.tournament in self.list_stock_tournament:
-            print(self.tournament.__str__())
+            i += 1
+            print(f"{i}.", self.tournament.__str__())
 
+    def return_tournament_played_match(self):
+        selec_tournament = int(input("Rentrez le numéro associé au tournoi pour plus de détails : "))
+        i = 0
+        j = 1
+        for id in self.list_stock_tournament[selec_tournament - 1].rem_id:
+            print(id)
+        for match in self.list_stock_tournament[selec_tournament - 1].played_match_result:
+
+
+            if i % 4 == 0:
+                print(f"Round {j}")
+                j += 1
+
+            if match[2] > 0:
+                print(f"Match opposant {match[0]} et {match[1]} avec pour vainqueur {match[2]}")
+                i += 1
+            else:
+                print(f"Match opposant {match[0]} et {match[1]} ayant comme résultat une égalité")
+                i += 1
+
+    def suppr_player(self, players_to_suppr):
+        del self.list_stock_players[players_to_suppr - 1]
+
+    def serialize_player(self):
+        self.players_table.truncate()
+
+        for player in self.list_stock_players:
+            serialized_player = {
+                "last_name": player.last_name,
+                "first_name": player.first_name,
+                "birthdate": player.birthdate,
+                "gender": player.gender,
+                "global_rank": player.global_rank
+            }
+            self.players_table.insert(serialized_player)
+
+    def deserialize_player(self):
+        for player in self.players_table:
+            last_name = player['last_name']
+            first_name = player['first_name']
+            birthdate = player['birthdate']
+            gender = player['gender']
+            global_rank = player['global_rank']
+            player = Player(last_name=last_name,
+                            first_name=first_name,
+                            birthdate=birthdate,
+                            gender=gender,
+                            global_rank=global_rank)
+            self.list_stock_players.append(player)
+
+    def serialize_tournament(self):
+        self.tournaments_table.truncate()
+
+        for tournament in self.list_stock_tournament:
+            serialized_tournament = {
+                "name": tournament.name,
+                "place": tournament.place,
+                "date": tournament.date,
+                "players": tournament.players,
+                "nb_of_rounds": tournament.nb_of_rounds,
+                "dict_fsort": tournament.dict_fsort,
+                "rem_id": tournament.rem_id,
+                "final_result": tournament.final_result,
+                "played_match_result": tournament.played_match_result
+            }
+            self.tournaments_table.insert(serialized_tournament)
+
+    def deserialize_tournament(self):
+        for tournament in self.tournaments_table:
+            name = tournament['name']
+            place = tournament['place']
+            date = tournament['date']
+            players = tournament['players']
+            nb_of_rounds = tournament['nb_of_rounds']
+            dict_fsort = tournament['dict_fsort']
+            rem_id = tournament['rem_id']
+            final_result = tournament['final_result']
+            played_match = tournament['played_match']
+            tournament = Tournament(name=name,
+                                    place=place,
+                                    date=date,
+                                    players=players,
+                                    nb_of_rounds=nb_of_rounds,
+                                    dict_fsort=dict_fsort,
+                                    rem_id=rem_id,
+                                    final_result=final_result,
+                                    played_match=played_match)
+            self.list_stock_tournament.append(tournament)

@@ -11,7 +11,8 @@ class Tournament:
         self.rem_id = []
         self.players_fmatch = []
         self.final_result = []
+        self.played_match_result = []
 
     def __str__(self):
-        tournament_presentation = f'Ce tournoi "{self.name}", se déroule à "{self.place}", le "{self.date}".'
+        tournament_presentation = f'Tournoi "{self.name}", se déroule à "{self.place}", le "{self.date}".'
         return tournament_presentation

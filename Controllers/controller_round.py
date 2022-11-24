@@ -1,14 +1,15 @@
-from Controllers.controller_match import Match
+from Controllers.controller_match import MatchC
+from Models.model_round import Round
 
 
-class Round():
+class RoundController:
     """Initialisation du tour 1"""
 
     def __init__(self, list_players):
         self.list_players = list_players
-        self.played_match = []
-        self.pair_fmatch = []
-        self.score_dict = {}
+        self.m_round = Round()
+        self.match_and_result = []
+
 
     def create_pair_round1(self):
 
@@ -18,10 +19,10 @@ class Round():
             i = (i, 0)
             j = (j, 0)
             k = (i, j)
-            self.pair_fmatch.append(dict(k))
-            self.played_match.append((i[0], j[0]))
+            self.m_round.pair_fmatch.append(dict(k))
+            self.m_round.played_match.append((i[0], j[0]))
 
-        return self.pair_fmatch, self.played_match
+        return self.m_round.pair_fmatch, self.m_round.played_match
 
     def create_pair_otherr(self):
         m = []
@@ -36,43 +37,44 @@ class Round():
 
             if len(m) == 0:
                 break
-            if (m[i][0], m[i + 1][0]) not in self.played_match:
-                self.pair_fmatch.append(dict((m[i], m[i + 1])))
-                self.played_match.append((m[i][0], m[i + 1][0]))
+            if (m[i][0], m[i + 1][0]) not in self.m_round.played_match:
+                self.m_round.pair_fmatch.append(dict((m[i], m[i + 1])))
+                self.m_round.played_match.append((m[i][0], m[i + 1][0]))
                 m.remove(m[i])
                 m.remove(m[i])
             else:
                 try:
-                    if (m[i][0], m[i + j][0]) not in self.played_match:
+                    if (m[i][0], m[i + j][0]) not in self.m_round.played_match:
                         try:
-                            self.pair_fmatch.append(dict((m[i], m[i + j])))
-                            self.played_match.append((m[i][0], m[i + j][0]))
+                            self.m_round.pair_fmatch.append(dict((m[i], m[i + j])))
+                            self.m_round.played_match.append((m[i][0], m[i + j][0]))
                             m.remove(m[i])
                             m.remove(m[i+j-1])
                         except IndexError:
-                            self.pair_fmatch.append(dict((m[i], m[i + 1])))
-                            self.played_match.append((m[i][0], m[i + 1][0]))
+                            self.m_round.pair_fmatch.append(dict((m[i], m[i + 1])))
+                            self.m_round.played_match.append((m[i][0], m[i + 1][0]))
                             m.remove(m[i])
                             m.remove(m[i])
                     else:
                         j += 1
 
                 except IndexError:
-                    self.pair_fmatch.append(dict((m[i], m[i + 1])))
-                    self.played_match.append((m[i][0], m[i + 1][0]))
+                    self.m_round.pair_fmatch.append(dict((m[i], m[i + 1])))
+                    self.m_round.played_match.append((m[i][0], m[i + 1][0]))
                     m.remove(m[i])
                     m.remove(m[i])
 
     def run_match(self):
 
-        for i in range(len(self.pair_fmatch)):
-            match = Match(self.pair_fmatch[i])
+        for i in range(len(self.m_round.pair_fmatch)):
+            match = MatchC(self.m_round.pair_fmatch[i])
             match.result()
-            self.pair_fmatch[i].update
-            self.score_dict.update(self.pair_fmatch[i])
+            self.match_and_result.append(match.match_and_result)
+            self.m_round.pair_fmatch[i].update
+            self.m_round.score_dict.update(self.m_round.pair_fmatch[i])
 
-        self.score_dict = dict(sorted(self.score_dict.items(), key=lambda x: x[1], reverse=True))
+        self.score_dict = dict(sorted(self.m_round.score_dict.items(), key=lambda x: x[1], reverse=True))
         self.list_players = list(self.score_dict.keys())
 
-        self.pair_fmatch.clear()
+        self.m_round.pair_fmatch.clear()
         return self.score_dict
