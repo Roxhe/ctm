@@ -24,8 +24,8 @@ class DisplayPlayer:
 
     def prompt_suppr_player(self, players_rapport):
         players_rapport.return_player_list()
-        players_to_suppr = int(input("Entrez le numéro du joueur à supprimer :  "))
-        players_rapport.suppr_player(players_to_suppr)
+        player_to_suppr = int(input("Entrez le numéro du joueur à supprimer :  "))
+        players_rapport.suppr_player(player_to_suppr)
 
     def prompt_suppr_players(self, players_rapport):
         while True:
@@ -35,6 +35,22 @@ class DisplayPlayer:
                 continue
             elif end_or_not == 'n':
                 players_rapport.return_player_list()
+                break
+
+    def prompt_modif_player_rank(self, players_rapport):
+        players_rapport.return_player_list()
+        players_to_modif = int(input("Entrez le numéro du joueur auquel modifier le classement :\n"))
+        print(players_rapport.list_stock_players[players_to_modif - 1].__str__())
+        new_rank = int(input("Entrez le nouveau classement du joueur :\n"))
+        players_rapport.modif_player_rank(players_to_modif, new_rank)
+
+    def prompt_modif_players_ranks(self, players_rapport):
+        while True:
+            self.prompt_modif_player_rank(players_rapport)
+            end_or_not = input("Souhaitez vous supprimer un autre joueur ? yes : y / no : n\n")
+            if end_or_not == 'y':
+                continue
+            elif end_or_not == 'n':
                 break
 
     def prompt_players(self, players_rapport):

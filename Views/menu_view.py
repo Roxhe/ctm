@@ -55,8 +55,9 @@ class Menu:
     
     1. Créer les Joueurs
     2. Liste des Joueurs existants
-    3. Supprimer des Joueurs
-    4. Retour au menu principal
+    3. Modifier classement Joueurs
+    4. Supprimer des Joueurs
+    5. Retour au menu principal
         """
 
         main_sub_player0 = Markdown(main_sub_player)

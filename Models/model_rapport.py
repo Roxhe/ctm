@@ -19,6 +19,12 @@ class Rapport:
         return self.player
 
     def return_player_list(self):
+        choice = int(input("Taper 1 pour afficher en ordre alphabétique.\nTaper 2 pour afficher par classement.\n"))
+        match choice:
+            case 1:
+                self.list_stock_players.sort(key=lambda player: player.last_name)
+            case 2:
+                self.list_stock_players.sort(key=lambda player: player.global_rank, reverse=True)
         i = 0
         for self.player in self.list_stock_players:
             i += 1
@@ -31,13 +37,19 @@ class Rapport:
             print(f"{i}.", self.tournament.__str__())
 
     def return_tournament_played_match(self):
-        selec_tournament = int(input("Rentrez le numéro associé au tournoi pour plus de détails : "))
+        selec_tournament = int(input("Rentrez le numéro associé au tournoi pour plus de détails : \n"))
+        self.list_stock_tournament[selec_tournament - 1].players.sort(key=lambda player: player.last_name)
+        print("Liste de joueur par ordre alphabétique :")
+        i = 0
+        for player in self.list_stock_tournament[selec_tournament - 1].players:
+            i += 1
+            print(f"{i}. ", player.__str__())
+        print("Numéro des joueurs pendant le tournoi :")
         i = 0
         j = 1
         for id in self.list_stock_tournament[selec_tournament - 1].rem_id:
             print(id)
         for match in self.list_stock_tournament[selec_tournament - 1].played_match_result:
-
 
             if i % 4 == 0:
                 print(f"Round {j}")
@@ -50,8 +62,18 @@ class Rapport:
                 print(f"Match opposant {match[0]} et {match[1]} ayant comme résultat une égalité")
                 i += 1
 
+        print("Liste des joueurs par classement dans le tournoi :")
+        for n, m in zip(list(range(1, 8 + 1)), self.list_stock_tournament[selec_tournament - 1].final_result):
+            for player in self.list_stock_tournament[selec_tournament - 1].players:
+                if m[0] == player.id:
+                    p = f"{player.last_name} {player.first_name}"
+            print(f"{n}. Nom : {p}\n ID : {m[0]}\n Score: {m[1]}")
+
     def suppr_player(self, players_to_suppr):
         del self.list_stock_players[players_to_suppr - 1]
+
+    def modif_player_rank(self, players_to_modif, new_rank):
+        self.list_stock_players[players_to_modif - 1].global_rank = new_rank
 
     def serialize_player(self):
         self.players_table.truncate()

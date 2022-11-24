@@ -64,9 +64,12 @@ class NavController:
                 self.rapport.return_player_list()
                 self.nav_submenu_player()
             case 3:
-                self.view_player.prompt_suppr_players(self.rapport)
+                self.view_player.prompt_modif_players_ranks(self.rapport)
                 self.nav_submenu_player()
             case 4:
+                self.view_player.prompt_suppr_players(self.rapport)
+                self.nav_submenu_player()
+            case 5:
                 self.nav_main()
             case _:
                 self.menu.menu_error()
