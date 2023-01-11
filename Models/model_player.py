@@ -11,6 +11,19 @@ class Player:
         self.score = 0.0
         self.id = 0
 
+    def serialize(self):
+        serialized_player = dict()
+        serialized_player['LastName'] = self.last_name
+        serialized_player['FirstName'] = self.first_name
+        serialized_player['Birthdate'] = self.birthdate
+        serialized_player['Gender'] = self.gender
+        serialized_player['GlobalRank'] = self.global_rank
+        return serialized_player
+
+    def deserialize(self):
+        deserialized_player = (self.last_name, self.first_name, self.birthdate, self.gender, self.global_rank)
+        return deserialized_player
+
     def __str__(self):
         player_presentation = f'Nom : {self.last_name}, Prénom : {self.first_name}, Rang : {self.global_rank}'
         return player_presentation

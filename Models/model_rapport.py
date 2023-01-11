@@ -106,18 +106,7 @@ class Rapport:
         self.tournaments_table.truncate()
 
         for tournament in self.list_stock_tournament:
-            serialized_tournament = {
-                "name": tournament.name,
-                "place": tournament.place,
-                "date": tournament.date,
-                "players": tournament.players,
-                "nb_of_rounds": tournament.nb_of_rounds,
-                "dict_fsort": tournament.dict_fsort,
-                "rem_id": tournament.rem_id,
-                "final_result": tournament.final_result,
-                "played_match_result": tournament.played_match_result
-            }
-            self.tournaments_table.insert(serialized_tournament)
+            self.tournaments_table.insert(tournament.serialize())
 
     def deserialize_tournament(self):
         for tournament in self.tournaments_table:
