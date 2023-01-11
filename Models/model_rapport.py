@@ -79,22 +79,15 @@ class Rapport:
         self.players_table.truncate()
 
         for player in self.list_stock_players:
-            serialized_player = {
-                "last_name": player.last_name,
-                "first_name": player.first_name,
-                "birthdate": player.birthdate,
-                "gender": player.gender,
-                "global_rank": player.global_rank
-            }
-            self.players_table.insert(serialized_player)
+            self.players_table.insert(player.serialize())
 
     def deserialize_player(self):
         for player in self.players_table:
-            last_name = player['last_name']
-            first_name = player['first_name']
-            birthdate = player['birthdate']
-            gender = player['gender']
-            global_rank = player['global_rank']
+            last_name = player['LastName']
+            first_name = player['FirstName']
+            birthdate = player['Birthdate']
+            gender = player['Gender']
+            global_rank = player['GlobalRank']
             player = Player(last_name=last_name,
                             first_name=first_name,
                             birthdate=birthdate,
@@ -110,15 +103,15 @@ class Rapport:
 
     def deserialize_tournament(self):
         for tournament in self.tournaments_table:
-            name = tournament['name']
-            place = tournament['place']
-            date = tournament['date']
-            players = tournament['players']
-            nb_of_rounds = tournament['nb_of_rounds']
-            dict_fsort = tournament['dict_fsort']
-            rem_id = tournament['rem_id']
-            final_result = tournament['final_result']
-            played_match = tournament['played_match']
+            name = tournament['Name']
+            place = tournament['Place']
+            date = tournament['Date']
+            players = tournament['Players']
+            nb_of_rounds = tournament['Nb_of_rounds']
+            dict_fsort = tournament['Dict_fsort']
+            rem_id = tournament['Rem_id']
+            final_result = tournament['Final_result']
+            played_match = tournament['Played_match_result']
             tournament = Tournament(name=name,
                                     place=place,
                                     date=date,
