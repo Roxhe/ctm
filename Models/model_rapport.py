@@ -125,6 +125,7 @@ class Rapport:
             rem_id = tournament['Rem_id']
             final_result = tournament['Final_result'],
             played_match_result = tournament['Played_match_result']
+            round_time = tournament['Round_time']
             tournament = Tournament(name=name,
                                     place=place,
                                     date=date,
@@ -132,5 +133,6 @@ class Rapport:
                                     nb_of_rounds=nb_of_rounds,
                                     rem_id=rem_id,
                                     final_result=final_result,
-                                    played_match_result=played_match_result)
+                                    played_match_result=played_match_result,
+                                    round_time=round_time)
             self.list_stock_tournament.append(tournament)

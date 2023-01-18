@@ -36,11 +36,12 @@ class Tournament:
         serialized_tournament['Rem_id'] = self.rem_id
         serialized_tournament['Final_result'] = self.final_result
         serialized_tournament['Played_match_result'] = self.played_match_result
+        serialized_tournament['Round_time'] = self.round_time
         return serialized_tournament
 
     def deserialize(self):
         deserialized_tournament = (self.name, self.place, self.date, self.players, self.nb_of_rounds,
-                                    self.rem_id, self.final_result, self.played_match_result)
+                                    self.rem_id, self.final_result, self.played_match_result, self.round_time)
         return deserialized_tournament
 
     def __str__(self):

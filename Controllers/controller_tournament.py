@@ -22,7 +22,7 @@ class TournamentController:
         for i in range(8):
             ind_player = self.view_tournament.selec_player()
             self.players.append(tournament_rapport.list_stock_players[ind_player - 1])
-        self.tournament = Tournament(lst_t[0], lst_t[1], datetime.date.today(), self.players)
+        self.tournament = Tournament(lst_t[0], lst_t[1], str(datetime.date.today()), self.players)
         tournament_rapport.list_stock_tournament.append(self.tournament)
         return self.tournament, self.players
 
