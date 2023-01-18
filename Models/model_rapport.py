@@ -41,6 +41,9 @@ class Rapport:
     def return_tournament_played_match(self):
 
         selec_tournament = int(input("Rentrez le numéro associé au tournoi pour plus de détails : \n"))
+        print(self.list_stock_tournament[selec_tournament - 1])
+        print(self.list_stock_tournament[selec_tournament - 1].players)
+        print(self.list_stock_tournament[selec_tournament - 1].final_result)
         self.list_stock_tournament[selec_tournament - 1].players.sort(key=lambda player: player.last_name)
         print("Liste de joueur par ordre alphabétique :")
         i = 0
@@ -120,12 +123,30 @@ class Rapport:
             name = tournament['Name']
             place = tournament['Place']
             date = tournament['Date']
-            players = tournament['Players']
+            deserialized_player = []
+
+            player = tournament['Players']
+
+            last_name = player['LastName']
+            first_name = player['FirstName']
+            birthdate = player['Birthdate']
+            gender = player['Gender']
+            global_rank = player['GlobalRank']
+            player = Player(last_name=last_name,
+                                first_name=first_name,
+                                birthdate=birthdate,
+                                gender=gender,
+                                global_rank=global_rank)
+            deserialized_player.append(player)
+            players = deserialized_player
             nb_of_rounds = tournament['Nb_of_rounds']
             rem_id = tournament['Rem_id']
             final_result = tournament['Final_result'],
             played_match_result = tournament['Played_match_result']
             round_time = tournament['Round_time']
+
+            print(name, place, date, players, nb_of_rounds, rem_id, final_result, played_match_result, round_time)
+
             tournament = Tournament(name=name,
                                     place=place,
                                     date=date,
@@ -135,4 +156,7 @@ class Rapport:
                                     final_result=final_result,
                                     played_match_result=played_match_result,
                                     round_time=round_time)
+            print(tournament.name, tournament.place, tournament. date, tournament.players,
+                  tournament.rem_id, tournament.played_match_result,
+                  tournament.final_result, tournament.round_time)
             self.list_stock_tournament.append(tournament)
