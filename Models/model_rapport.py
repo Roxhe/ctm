@@ -41,9 +41,6 @@ class Rapport:
     def return_tournament_played_match(self):
 
         selec_tournament = int(input("Rentrez le numéro associé au tournoi pour plus de détails : \n"))
-        print(self.list_stock_tournament[selec_tournament - 1])
-        print(self.list_stock_tournament[selec_tournament - 1].players)
-        print(self.list_stock_tournament[selec_tournament - 1].final_result)
         self.list_stock_tournament[selec_tournament - 1].players.sort(key=lambda player: player.last_name)
         print("Liste de joueur par ordre alphabétique :")
         i = 0
@@ -85,7 +82,7 @@ class Rapport:
             for player in self.list_stock_tournament[selec_tournament - 1].players:
                 if m[0] == player.id:
                     p = f"{player.last_name} {player.first_name}"
-            print(f"{n}. Nom : {p}\n ID : {m[0]}\n Score: {m[1]}")
+                    print(f"{n}. Nom : {p}\n ID : {m[0]}\n Score: {m[1]}")
 
     def suppr_player(self, players_to_suppr):
         del self.list_stock_players[players_to_suppr - 1]
@@ -123,40 +120,36 @@ class Rapport:
             name = tournament['Name']
             place = tournament['Place']
             date = tournament['Date']
-            deserialized_player = []
 
-            player = tournament['Players']
-
-            last_name = player['LastName']
-            first_name = player['FirstName']
-            birthdate = player['Birthdate']
-            gender = player['Gender']
-            global_rank = player['GlobalRank']
-            player = Player(last_name=last_name,
+            deserialized_players = []
+            players = tournament['Players']
+            for player in players:
+                last_name = player['LastName']
+                first_name = player['FirstName']
+                birthdate = player['Birthdate']
+                gender = player['Gender']
+                global_rank = player['GlobalRank']
+                player = Player(last_name=last_name,
                                 first_name=first_name,
                                 birthdate=birthdate,
                                 gender=gender,
                                 global_rank=global_rank)
-            deserialized_player.append(player)
-            players = deserialized_player
+                deserialized_players.append(player)
+
             nb_of_rounds = tournament['Nb_of_rounds']
             rem_id = tournament['Rem_id']
             final_result = tournament['Final_result'],
             played_match_result = tournament['Played_match_result']
             round_time = tournament['Round_time']
 
-            print(name, place, date, players, nb_of_rounds, rem_id, final_result, played_match_result, round_time)
-
             tournament = Tournament(name=name,
                                     place=place,
                                     date=date,
-                                    players=players,
+                                    players=deserialized_players,
                                     nb_of_rounds=nb_of_rounds,
                                     rem_id=rem_id,
                                     final_result=final_result,
                                     played_match_result=played_match_result,
                                     round_time=round_time)
-            print(tournament.name, tournament.place, tournament. date, tournament.players,
-                  tournament.rem_id, tournament.played_match_result,
-                  tournament.final_result, tournament.round_time)
+
             self.list_stock_tournament.append(tournament)
