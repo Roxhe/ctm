@@ -1,5 +1,6 @@
 from Models.model_player import Player
 from Models.model_tournament import Tournament
+from Controllers.controller_round import RoundController
 from tinydb import TinyDB, Query
 
 class Rapport:
@@ -11,7 +12,8 @@ class Rapport:
         self.tournament = 0
         self.db = TinyDB('db.json')
         self.players_table = self.db.table("players")
-        self.tournaments_table = self.db.table("tournaments")
+        self.db_tournament = TinyDB('db_tournament.json')
+        self.tournaments_table = self.db_tournament.table("tournaments")
 
     def stock_player(self, lst):
         self.player = Player(lst[0], lst[1], lst[2], lst[3], lst[4])
@@ -37,6 +39,7 @@ class Rapport:
             print(f"{i}.", self.tournament.__str__())
 
     def return_tournament_played_match(self):
+
         selec_tournament = int(input("Rentrez le numéro associé au tournoi pour plus de détails : \n"))
         self.list_stock_tournament[selec_tournament - 1].players.sort(key=lambda player: player.last_name)
         print("Liste de joueur par ordre alphabétique :")
@@ -53,6 +56,18 @@ class Rapport:
 
             if i % 4 == 0:
                 print(f"Round {j}")
+                if j == 1:
+                    print(f"Début : {self.list_stock_tournament[selec_tournament - 1].round_time[0]}\n"
+                          f"Fin : {self.list_stock_tournament[selec_tournament - 1].round_time[1]}")
+                elif j == 2:
+                    print(f"Début : {self.list_stock_tournament[selec_tournament - 1].round_time[2]}\n"
+                          f"Fin : {self.list_stock_tournament[selec_tournament - 1].round_time[3]}")
+                elif j == 3:
+                    print(f"Début : {self.list_stock_tournament[selec_tournament - 1].round_time[4]}\n"
+                          f"Fin : {self.list_stock_tournament[selec_tournament - 1].round_time[5]}")
+                elif j == 4:
+                    print(f"Début : {self.list_stock_tournament[selec_tournament - 1].round_time[6]}\n"
+                          f"Fin : {self.list_stock_tournament[selec_tournament - 1].round_time[7]}")
                 j += 1
 
             if match[2] > 0:
@@ -97,7 +112,6 @@ class Rapport:
 
     def serialize_tournament(self):
         self.tournaments_table.truncate()
-
         for tournament in self.list_stock_tournament:
             self.tournaments_table.insert(tournament.serialize())
 
@@ -108,17 +122,15 @@ class Rapport:
             date = tournament['Date']
             players = tournament['Players']
             nb_of_rounds = tournament['Nb_of_rounds']
-            dict_fsort = tournament['Dict_fsort']
             rem_id = tournament['Rem_id']
-            final_result = tournament['Final_result']
-            played_match = tournament['Played_match_result']
+            final_result = tournament['Final_result'],
+            played_match_result = tournament['Played_match_result']
             tournament = Tournament(name=name,
                                     place=place,
                                     date=date,
                                     players=players,
                                     nb_of_rounds=nb_of_rounds,
-                                    dict_fsort=dict_fsort,
                                     rem_id=rem_id,
                                     final_result=final_result,
-                                    played_match=played_match)
+                                    played_match_result=played_match_result)
             self.list_stock_tournament.append(tournament)

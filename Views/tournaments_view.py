@@ -9,9 +9,9 @@ class DisplayTournament:
     def prompt_tournament(self):
         t_name = input("Entrez le nom du Tournoi :\n")
         t_place = input("Entrez l'endroit où se déroule le Tournoi :\n")
-        t_date = input("Entrez la date du tournoi (DD/MM/AAAA) : \n")
 
-        self.lst_input_tournament = [t_name, t_place, t_date]
+
+        self.lst_input_tournament = [t_name, t_place]
 
         return self.lst_input_tournament, self.tournament_rapport
 

@@ -1,7 +1,7 @@
 
 class Tournament:
     """Initialisation d'un Tournoi"""
-    def __init__(self, name, place, date,  players=[], nb_of_rounds=4):
+    def __init__(self, name, place, date,  players=[], nb_of_rounds=4, rem_id=[],players_fmatch = [],played_match_result = [], final_result = [], round_time = [] ):
         self.name = name
         self.place = place
         self.date = date
@@ -12,22 +12,34 @@ class Tournament:
         self.players_fmatch = []
         self.final_result = []
         self.played_match_result = []
+        self.round_time = []
 
     def serialize(self):
         serialized_tournament = dict()
         serialized_tournament['Name'] = self.name
         serialized_tournament['Place'] = self.place
         serialized_tournament['Date'] = self.date
-        serialized_tournament['Players'] = self.players
+        serialized_player = dict()
+        serialized_players = []
+        for player in self.players:
+
+            serialized_player['LastName'] = player.last_name
+            serialized_player['FirstName'] = player.first_name
+            serialized_player['Birthdate'] = player.birthdate
+            serialized_player['Gender'] = player.gender
+            serialized_player['GlobalRank'] = player.global_rank
+
+            serialized_players.append(serialized_player)
+
+        serialized_tournament['Players'] = serialized_player
         serialized_tournament['Nb_of_rounds'] = self.nb_of_rounds
-        serialized_tournament['Dict_fsort'] = self.dict_fsort
         serialized_tournament['Rem_id'] = self.rem_id
         serialized_tournament['Final_result'] = self.final_result
         serialized_tournament['Played_match_result'] = self.played_match_result
         return serialized_tournament
 
     def deserialize(self):
-        deserialized_tournament = (self.name, self.place, self.date, self.players, self.nb_of_rounds, self.dict_fsort,
+        deserialized_tournament = (self.name, self.place, self.date, self.players, self.nb_of_rounds,
                                     self.rem_id, self.final_result, self.played_match_result)
         return deserialized_tournament
 

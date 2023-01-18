@@ -25,8 +25,8 @@ class NavController:
             case 2:
                 self.nav_submenu_player()
             case 3:
-                self.rapport.serialize_tournament()
                 self.rapport.serialize_player()
+                self.rapport.serialize_tournament()
                 exit()
             case _:
                 self.menu.menu_error()
