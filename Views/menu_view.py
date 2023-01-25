@@ -13,14 +13,14 @@ class Menu:
     def display_menu(self):
 
         main_menu = """
-    # Bienvenue dans Chess Tournament Manager
-        
-        Veuillez sélectionner le menu désiré.
-        
-        1. Tournois
-        2. Joueurs
-        3. Quitter
-        """
+            # Bienvenue dans Chess Tournament Manager
+
+            Veuillez sélectionner le menu désiré.
+
+            1. Tournois
+            2. Joueurs
+            3. Quitter
+            """
 
         main_menu0 = Markdown(main_menu)
         console.print(main_menu0)
@@ -30,10 +30,10 @@ class Menu:
 
     def sub_tournament(self):
         main_sub_tournament = """
-    # Tournois
-    
-    Veuillez sélectionner le menu désiré.
-    
+        # Tournois
+
+        Veuillez sélectionner le menu désiré.
+
     1. Créer un Tournoi à partir de joueurs existants
     2. Créer un Tournoi à partir de nouveaux joueurs
     3. Liste des anciens Tournois
@@ -48,10 +48,9 @@ class Menu:
     def sub_player(self):
         main_sub_player = """
     # Joueurs
-        
-            
+
     Veuillez sélectionner le menu désiré.
-    
+
     1. Créer les Joueurs
     2. Liste des Joueurs existants
     3. Modifier classement Joueurs
