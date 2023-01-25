@@ -29,7 +29,7 @@ Toujours dans le dossier du projet, exécuter : \
 
 #### Executer le programme :
 Dans le dossier du projet avec git et la commande :
-python main.py
+`python main.py` \
 Ou manuellement en double cliquant sur `main.py` dans le dossier du projet. 
 
 /!\ - Attention, afin d'éviter de rencontrer des bugs, je vous conseille de rentrer les inputs correspondants à ce qui vous est demandés ! 
