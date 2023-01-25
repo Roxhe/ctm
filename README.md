@@ -37,3 +37,6 @@ Ou manuellement en double cliquant sur `main.py` dans le dossier du projet.
 #### Résultat :
 
 Le programme va s'éxécuter et vous pourrez gérer vos joueurs et vos tournois ! 
+
+#### Rapport Flake8 :
+Pour effectuer un rapport flake8, il vous suffit de rentrer la commande `flake8` dans le dossier du projet.
