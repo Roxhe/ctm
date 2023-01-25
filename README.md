@@ -1,4 +1,4 @@
-# Chess Tournament Maker
+# Chess Tournament Maker (Ancienne Version)
 
 Chess Tournament Maker est un outil tournant dans le terminal servant à gérer des joueurs et des tournois d'échecs, selon l'algorithme suisse.
 
