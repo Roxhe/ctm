@@ -18,7 +18,7 @@ class TournamentController:
         self.players.clear()
         self.view_tournament.prompt_tournament()
         lst_t = self.view_tournament.lst_input_tournament
-        tournament_rapport.return_player_list()
+        tournament_rapport.return_players_list()
         for i in range(8):
             ind_player = self.view_tournament.selec_player()
             self.players.append(tournament_rapport.list_stock_players[ind_player - 1])
