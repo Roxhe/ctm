@@ -13,7 +13,9 @@ Il est développé avec [Python 3.11](https://www.python.org/downloads/release/p
 Rendez vous dans le dossier de votre choix et cloner le projet avec : \
 `git clone https://github.com/Roxhe/ctm.git`
 
-Dans le dossier du projet, installer l'environnement virtuel avec : \
+Rendez vous dans le dossier du projet grâce à : \
+`cd ctm`
+Puis installer l'environnement virtuel avec : \
 `python -m venv 'env'`
 
 Puis activer le avec : \
