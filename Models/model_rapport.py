@@ -1,8 +1,8 @@
 from Models.model_player import Player
 from Models.model_tournament import Tournament
 from Views.rapport_view import DisplayRapport
-from Controllers.controller_round import RoundController
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
+
 
 class Rapport:
 
