@@ -1,4 +1,3 @@
-import datetime
 from Controllers.controller_match import MatchC
 from Models.model_round import Round
 
@@ -10,7 +9,6 @@ class RoundController:
         self.list_players = list_players
         self.m_round = Round()
         self.match_and_result = []
-
 
     def create_pair_round1(self):
 
@@ -79,4 +77,3 @@ class RoundController:
 
         self.m_round.pair_fmatch.clear()
         return self.score_dict
-

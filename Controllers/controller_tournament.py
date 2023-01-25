@@ -5,6 +5,7 @@ from Views.tournaments_view import DisplayTournament
 from Views.players_view import DisplayPlayer
 from Models.model_tournament import Tournament
 
+
 class TournamentController:
 
     def __init__(self):
@@ -12,7 +13,6 @@ class TournamentController:
         self.view_tournament = DisplayTournament()
         self.tournament = 0
         self.players = []
-
 
     def create_tournament(self, tournament_rapport):
         self.players.clear()
@@ -23,7 +23,7 @@ class TournamentController:
             ind_player = self.view_tournament.selec_player()
             self.players.append(tournament_rapport.list_stock_players[ind_player - 1])
         self.tournament = Tournament(lst_t[0], lst_t[1], str(datetime.date.today()), self.players)
-        tournament_rapport.list_stock_tournament.append(self.tournament)
+        tournament_rapport.list_stock_tournaments.append(self.tournament)
         return self.tournament, self.players
 
     def create_tournament_new_players(self, tournament_rapport):
@@ -32,7 +32,7 @@ class TournamentController:
         lst_t = self.view_tournament.lst_input_tournament
         self.players = self.view_player.prompt_players_new_tournament(tournament_rapport)
         self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], self.players)
-        tournament_rapport.list_stock_tournament.append(self.tournament)
+        tournament_rapport.list_stock_tournaments.append(self.tournament)
         return self.tournament, self.players
 
     def sort_player(self):
@@ -61,7 +61,6 @@ class TournamentController:
         self.round_tracker()
         self.view_tournament.reminds_id(self.tournament)
 
-
         for i in range(self.tournament.nb_of_rounds - 1):
 
             self.view_tournament.display_round_bounds(i)
@@ -70,7 +69,6 @@ class TournamentController:
             round_m.run_match()
             self.round_tracker()
             self.view_tournament.reminds_id(self.tournament)
-
 
         for k, l in zip(round_m.score_dict.keys(), round_m.score_dict.values()):
             a = (k, l)

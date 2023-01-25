@@ -1,5 +1,6 @@
 from Models.model_rapport import Rapport
 
+
 class DisplayTournament:
 
     def __init__(self):
@@ -9,7 +10,6 @@ class DisplayTournament:
     def prompt_tournament(self):
         t_name = input("Entrez le nom du Tournoi :\n")
         t_place = input("Entrez l'endroit où se déroule le Tournoi :\n")
-
 
         self.lst_input_tournament = [t_name, t_place]
 
@@ -23,8 +23,7 @@ class DisplayTournament:
             print(f"{player.last_name} {player.first_name} porte le numéro {player.id}.")
 
     def reminds_id(self, tournament):
-        o = input("Pour un rappel des numéros de joueur tapé : y\n"
-                      "Pour continuer, appuyer sur Entrée\n")
+        o = input("Pour un rappel des numéros de joueur tapé : y\n" "Pour continuer, appuyer sur Entrée\n")
         if o == 'y':
             for player in tournament.players:
                 print(f"{player.last_name} {player.first_name} porte le numéro {player.id}.")

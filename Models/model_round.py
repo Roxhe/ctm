@@ -5,4 +5,3 @@ class Round:
         self.played_match = []
         self.pair_fmatch = []
         self.score_dict = {}
-

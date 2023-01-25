@@ -1,6 +1,7 @@
 from Views.match_view import DisplayMatch
 from Models.model_match import Match
 
+
 class MatchC:
     """Initialisation d'un Match"""
     def __init__(self, pair):
