@@ -23,7 +23,7 @@ class TournamentController:
             ind_player = self.view_tournament.selec_player()
             self.players.append(tournament_rapport.list_stock_players[ind_player - 1])
         self.tournament = Tournament(lst_t[0], lst_t[1], str(datetime.date.today()), self.players)
-        tournament_rapport.list_stock_tournament.append(self.tournament)
+        tournament_rapport.list_stock_tournaments.append(self.tournament)
         return self.tournament, self.players
 
     def create_tournament_new_players(self, tournament_rapport):
@@ -32,7 +32,7 @@ class TournamentController:
         lst_t = self.view_tournament.lst_input_tournament
         self.players = self.view_player.prompt_players_new_tournament(tournament_rapport)
         self.tournament = Tournament(lst_t[0], lst_t[1], lst_t[2], self.players)
-        tournament_rapport.list_stock_tournament.append(self.tournament)
+        tournament_rapport.list_stock_tournaments.append(self.tournament)
         return self.tournament, self.players
 
     def sort_player(self):

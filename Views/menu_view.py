@@ -10,7 +10,6 @@ class Menu:
     def __init__(self):
         self.choice = 0
 
-
     def display_menu(self):
 
         main_menu = """
