@@ -23,7 +23,7 @@ class DisplayPlayer:
         return player
 
     def prompt_suppr_player(self, players_rapport):
-        players_rapport.return_player_list()
+        players_rapport.return_players_list()
         player_to_suppr = int(input("Entrez le numéro du joueur à supprimer :  "))
         players_rapport.suppr_player(player_to_suppr)
 
@@ -34,11 +34,11 @@ class DisplayPlayer:
             if end_or_not == 'y':
                 continue
             elif end_or_not == 'n':
-                players_rapport.return_player_list()
+                players_rapport.return_players_list()
                 break
 
     def prompt_modif_player_rank(self, players_rapport):
-        players_rapport.return_player_list()
+        players_rapport.return_players_list()
         players_to_modif = int(input("Entrez le numéro du joueur auquel modifier le classement :\n"))
         print(players_rapport.list_stock_players[players_to_modif - 1].__str__())
         new_rank = int(input("Entrez le nouveau classement du joueur :\n"))
@@ -60,7 +60,7 @@ class DisplayPlayer:
             if end_or_not == 'y':
                 continue
             elif end_or_not == 'n':
-                players_rapport.return_player_list()
+                players_rapport.return_players_list()
                 break
 
     def prompt_players_new_tournament(self, players_rapport):
