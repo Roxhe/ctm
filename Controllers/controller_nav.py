@@ -45,7 +45,7 @@ class NavController:
                 self.tournament_controller.tournament_in_play()
                 self.nav_submenu_tournament()
             case 3:
-                self.rapport.return_tournament_list()
+                self.rapport.return_tournaments_list()
                 self.rapport.return_tournament_played_match()
                 self.nav_submenu_tournament()
             case 4:
@@ -61,7 +61,7 @@ class NavController:
                 self.view_player.prompt_players(self.rapport)
                 self.nav_submenu_player()
             case 2:
-                self.rapport.return_player_list()
+                self.rapport.return_players_list()
                 self.nav_submenu_player()
             case 3:
                 self.view_player.prompt_modif_players_ranks(self.rapport)

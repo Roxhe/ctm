@@ -43,10 +43,3 @@ class Tournament:
     def __str__(self):
         tournament_presentation = f'Tournoi "{self.name}", se déroule à "{self.place}", le "{self.date}".'
         return tournament_presentation
-
-    def deserialize(self):
-        deserialized_tournament = (self.name, self.place, self.date, self.players, self.nb_of_rounds,
-                                    self.rem_id, self.final_result, self.played_match_result, self.round_time)
-        return deserialized_tournament
-
-
