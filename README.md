@@ -15,6 +15,7 @@ Rendez vous dans le dossier de votre choix et cloner le projet avec : \
 
 Rendez vous dans le dossier du projet grâce à : \
 `cd ctm`
+
 Puis installer l'environnement virtuel avec : \
 `python -m venv 'env'`
 
